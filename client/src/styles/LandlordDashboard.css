@@ -1,0 +1,177 @@
+/* Main container for full width background */
+.landlord-dashboard-container {
+  width: 100%;
+  min-height: 10vh;
+  background-color: #fafafa;
+  padding: 40px 0;
+}
+
+/* Dashboard content container */
+.landlord-dashboard {
+  max-width: 1000px; /* Optimal width for single column */
+  margin: 0 auto;
+ 
+  padding: 40px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  position: relative;
+}
+
+.profile-icon-container {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.profile-icon {
+  font-size: 2.8rem;
+  color: #2a52be;
+  transition: color 0.3s ease;
+}
+
+.profile-icon-container:hover {
+  transform: scale(1.1);
+}
+
+.profile-icon-container:hover .profile-icon {
+  color: #1d3ea5;
+}
+
+.landlord-dashboard h1 {
+  color: #2a52be;
+  margin-bottom: 40px;
+  margin-top: 20px;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+/* Single column layout */
+.dashboard-column {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+}
+
+.dashboard-section {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  text-align: center; /* Center all text */
+  border: 1px solid #eaeef5;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 100%;
+}
+
+.dashboard-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.dashboard-section h2 {
+  color: #1a2b50;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.dashboard-section p {
+  color: #555;
+  margin-bottom: 25px;
+  font-size: 1rem;
+  line-height: 1.5;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.action-btn {
+  background-color: #2a52be;
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  width: auto;
+  min-width: 200px;
+}
+
+.action-btn:hover {
+  background-color: #1d3ea5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(42, 82, 190, 0.3);
+}
+
+.newaction-btn {
+  background-color: #27b63f;
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  width: auto;
+  min-width: 200px;
+}
+
+.newaction-btn:hover {
+  background-color: #1f9e35;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(39, 182, 63, 0.3);
+}
+
+.action-btn.premium {
+  background-color: #ff9800;
+}
+
+.action-btn.premium:hover {
+  background-color: #e68a00;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .landlord-dashboard {
+    padding: 30px 20px;
+    max-width: 95%;
+  }
+  
+  .profile-icon-container {
+    top: 20px;
+    left: 20px;
+  }
+  
+  .profile-icon {
+    font-size: 2.2rem;
+  }
+  
+  .landlord-dashboard h1 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+  
+  .dashboard-section {
+    padding: 25px;
+  }
+  
+  .action-btn, .newaction-btn {
+    padding: 12px 20px;
+    min-width: 180px;
+  }
+}

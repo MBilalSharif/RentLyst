@@ -1,0 +1,131 @@
+/* Navbar.css */
+
+.header {
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display:flex;
+  align-items: center;
+  justify-content: space-between; /* This will create the three sections */
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between; /* Ensure space between the three sections */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* This will stay on the left */
+  flex: 1; /* Allow it to take up space but not push others */
+}
+
+.logo-icon {
+  color: #2a52be;
+  width: 28px;
+  height: 28px;
+}
+
+.logo-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2a52be;
+}
+
+.nav {
+  display: flex;
+  gap: 44px;
+  /* This will be centered */
+  justify-content: center;
+  flex: 2; /* Give the nav more flex space to help with centering */
+}
+
+.navlinkss {
+  text-decoration: none;
+  font-weight: 500;
+  color: #05224dd7;
+  transition: color 0.3s;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.navlinkss:hover {
+  color: #db2525;
+  text-decoration: underline;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 12px;
+  /* This will stay on the right */
+  justify-content: flex-end;
+  flex: 1; /* Allow it to take up space but not push others */
+}
+
+.btn-ghost {
+  border: 1px solid #2a52be;
+  background-color: transparent;
+  color: #2a52be;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s, color 0.3s;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.btn-ghost:hover {
+  background-color: #2a52be;
+  color: white;
+}
+
+.btn-primary {
+  background-color: #2a52be;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.btn-primary:hover {
+  background-color: #1d3ca6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .logo {
+    justify-content: center;
+  }
+  
+  .auth-buttons {
+    justify-content: center;
+  }
+}

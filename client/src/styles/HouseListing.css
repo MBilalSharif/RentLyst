@@ -1,0 +1,27 @@
+.listing-page {
+  padding: 50px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.listing-title {
+  text-align: center;
+  font-size: 36px;
+  color: #1a2b50;
+  margin-bottom: 40px;
+}
+
+
+.listing-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+
+/* .listing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+} */
