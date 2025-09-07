@@ -97,9 +97,10 @@ npm run dev
 cd ../frontend
 npm start
 
-📸 Screenshots (Optional)
+📸 Screenshots
 
-Add some screenshots of your UI to make the README more attractive.
+<img width="1342" height="681" alt="rentlystgit3" src="https://github.com/user-attachments/assets/67157390-7924-4fe9-b07b-2e2c2525e5a2" />
+
 
 🤝 Contributing
 
