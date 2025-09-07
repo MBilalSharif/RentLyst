@@ -1,0 +1,112 @@
+🏡 RentLyst
+
+RentLyst is a full-stack MERN (MongoDB, Express, React, Node.js) web application designed for renting houses and apartments. It connects landlords and renters by providing a seamless platform to list, manage, and browse rental properties.
+
+✨ Features
+👤 Authentication & User Management
+
+Secure JWT-based authentication (Login / Register).
+
+Roles: Landlord and Renter.
+
+Landlord profile management with image & ID uploads.
+
+🏠 Property Listings
+
+Landlords can add, edit, delete rental properties.
+
+Upload property images with descriptions, price, and location.
+
+View all properties with search and filter options.
+
+📊 Landlord Dashboard
+
+Add and manage multiple properties.
+
+Update personal and business details.
+
+Feature property for better visibility.
+
+🔍 Renters’ Features
+
+Browse all available listings.
+
+Filter by location, price, and area.
+
+View detailed property information.
+
+🛠️ Tech Stack
+
+Frontend:
+
+React.js (with components, props, state)
+
+React Router DOM (for navigation)
+
+Axios (for API calls)
+
+CSS Modules / Custom Styling
+
+Backend:
+
+Node.js & Express.js
+
+MongoDB & Mongoose (Schema-based models)
+
+bcrypt.js (password hashing)
+
+JSON Web Tokens (authentication)
+
+Multer + Cloudinary (image uploads)
+
+🚀 Installation
+
+Clone the repository:
+
+git clone https://github.com/your-username/RentLyst.git
+cd RentLyst
+
+
+Install dependencies for both backend and frontend:
+
+# Backend
+cd backend
+npm install
+
+# Frontend
+cd ../frontend
+npm install
+
+
+Create a .env file in the backend folder with:
+
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+
+
+Run the development servers:
+
+# Backend
+cd backend
+npm run dev
+
+# Frontend
+cd ../frontend
+npm start
+
+📸 Screenshots (Optional)
+
+Add some screenshots of your UI to make the README more attractive.
+
+🤝 Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you’d like to change.
+
+📜 License
+
+This project is licensed under the MIT License.
+
+⚡ With RentLyst, finding and renting your next home has never been easier!
