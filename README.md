@@ -99,6 +99,10 @@ npm start
 
 📸 Screenshots
 
+<img width="1348" height="668" alt="rentLystgit1" src="https://github.com/user-attachments/assets/87d28029-3610-463a-8c7b-a6ba537cfa1c" />
+<img width="1350" height="633" alt="rentlystgit2" src="https://github.com/user-attachments/assets/de6637c1-22af-4f0f-8ff1-e79399bc1f8a" />
+
+
 <img width="1342" height="681" alt="rentlystgit3" src="https://github.com/user-attachments/assets/67157390-7924-4fe9-b07b-2e2c2525e5a2" />
 
 
