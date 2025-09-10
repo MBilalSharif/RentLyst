@@ -16,7 +16,7 @@ const storage = new CloudinaryStorage({
   cloudinary,
   params: {
     folder: 'rental_properties', // Folder in Cloudinary
-    allowed_formats: ['jpeg', 'jpg', 'png', 'webp'],
+    allowed_formats: ['jpeg', 'jpg', 'png', 'webp', 'pdf'],
     transformation: [{ width: 800, height: 600, crop: 'limit' }], // optional resize
   },
 });
