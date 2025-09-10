@@ -12,8 +12,8 @@ const path = require('path');
 const app = express();
 
 // Serve uploaded images
-app.use('/upload', express.static(path.join(process.cwd(), 'upload')));
-app.use("/upload", express.static(path.join(__dirname, "upload"))); 
+// app.use('/upload', express.static(path.join(process.cwd(), 'upload')));
+// app.use("/upload", express.static(path.join(__dirname, "upload"))); 
 
 // Core middleware
 app.use(cors());
