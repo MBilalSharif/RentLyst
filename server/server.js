@@ -20,7 +20,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use('/api/properties', propertyRoutes);
+
 app.use('/api/rentals', rentalRoutes);
 app.use('/api/auth', authRoutes);
 
