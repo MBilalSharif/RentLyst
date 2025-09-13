@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/MyListedProperties.css';
 import { useNavigate } from 'react-router-dom';
+import API from '../api';
 
 const MyListedProperties = () => {
   const [properties, setProperties] = useState([]);
@@ -13,11 +14,11 @@ const MyListedProperties = () => {
   const fetchProperties = async () => {
     const token = sessionStorage.getItem('token');
     try {
-      const res = await fetch('http://localhost:5000/api/rentals/my-properties', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
+  const res = await API.get("/rentals/my-properties", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
       const data = await res.json();
       if (res.ok) setProperties(data);
       else alert(data.msg || "Error fetching listings.");

@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../styles/AddRentalProperty.css";
 import Navbar from "./NavLandlord";
+import API from "../api";
 
 const AddRentalProperty = () => {
   const [title, setTitle] = useState("");
@@ -29,14 +30,14 @@ const AddRentalProperty = () => {
       // ✅ Append all images
       images.forEach((img) => formData.append("image", img));
 
-      const res = await axios.post("http://localhost:5000/api/rentals", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await API.post("/rentals", formData, {
+  headers: {
+    "Content-Type": "multipart/form-data",
+    Authorization: `Bearer ${token}`,
+  },
+});
 
-      console.log("Property added:", res.data);
+console.log("Property added:", res.data);
 
       // Reset form
       setTitle("");

@@ -4,6 +4,7 @@ import { Lock, Mail, ArrowRight } from "lucide-react";
 import "../styles/Auth.css";
 import Navbar from "./NavBar";
 import Footer from './Footer';
+import API from '../api';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -19,37 +20,31 @@ const Login = () => {
     setIsSubmitting(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+  const res = await API.post("/auth/login", formData);
 
-      const data = await res.json();
+  if (res.status === 200) {
+    const data = res.data;
 
-      if (res.ok) {
-        
-        sessionStorage.setItem("token", data.token);
-        sessionStorage.setItem("role", data.user.role);
-        sessionStorage.setItem("user", JSON.stringify(data.user));
+    sessionStorage.setItem("token", data.token);
+    sessionStorage.setItem("role", data.user.role);
+    sessionStorage.setItem("user", JSON.stringify(data.user));
 
-        // Redirect based on role
-        if (data.user.role === "landlord") {
-          navigate("/landlord-dashboard");
-        } else {
-          navigate("/");
-        }
-      } else {
-        alert(data.msg || "Login failed");
-      }
-    } catch (error) {
-      console.error("Login error:", error);
-      alert("Server error");
-    } finally {
-      setIsSubmitting(false);
+    // Redirect based on role
+    if (data.user.role === "landlord") {
+      navigate("/landlord-dashboard");
+    } else {
+      navigate("/");
     }
+  } else {
+    alert(res.data.msg || "Login failed");
+  }
+} catch (error) {
+  console.error("Login error:", error);
+  alert(error.response?.data?.msg || "Server error");
+} finally {
+  setIsSubmitting(false);
+}
   };
-
   return (
     <>
       <Navbar />

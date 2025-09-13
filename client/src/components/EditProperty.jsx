@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../styles/EditProperty.css';
+import API from '../api';
 
 const EditProperty = () => {
   const { id } = useParams();
@@ -20,10 +21,13 @@ const EditProperty = () => {
   useEffect(() => {
     const fetchProperty = async () => {
       const token = sessionStorage.getItem('token');
-      try {
-        const res = await fetch(`http://localhost:5000/api/rentals/${id}`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+     
+try {
+  const res = await API.get(`/rentals/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
         const data = await res.json();
         if (res.ok) {
           setFormData(data);

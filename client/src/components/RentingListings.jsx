@@ -3,33 +3,36 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from "./NavBar";
 import '../styles/RentingListings.css';
 import Footer from './Footer';
+import API from '../api';
 
 const RentingListings = () => {
   const [rentals, setRentals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
-  const navigate = useNavigate(); // ✅ useNavigate hook
+  const navigate = useNavigate();
 
   const queryParams = new URLSearchParams(location.search);
-  const searchLocation = queryParams.get('location');
+  const searchLocation = queryParams.get("location");
 
   useEffect(() => {
-    let url = 'http://localhost:5000/api/rentals';
-    if (searchLocation) {
-      url += `?location=${encodeURIComponent(searchLocation)}`;
-    }
+    const fetchRentals = async () => {
+      try {
+        setIsLoading(true);
+        let endpoint = "/rentals";
+        if (searchLocation) {
+          endpoint += `?location=${encodeURIComponent(searchLocation)}`;
+        }
 
-    setIsLoading(true);
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        setRentals(data);
+        const res = await API.get(endpoint);
+        setRentals(res.data);
+      } catch (err) {
+        console.error("Error fetching rentals:", err);
+      } finally {
         setIsLoading(false);
-      })
-      .catch((err) => {
-        console.error('Error fetching rentals:', err);
-        setIsLoading(false);
-      });
+      }
+    };
+
+    fetchRentals();
   }, [searchLocation]);
 
   // ✅ Navigate to property detail page

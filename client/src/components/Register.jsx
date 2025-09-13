@@ -4,6 +4,7 @@ import { User, Mail, Lock, Home, ArrowRight } from 'lucide-react';
 import '../styles/Auth.css';
 import Navbar from './NavBar';
 import Footer from './Footer';
+import API from '../api';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -23,28 +24,26 @@ const Register = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    try {
-      const res = await fetch('http://localhost:5000/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
+  
 
-      const data = await res.json();
-      if (res.ok) {
-        alert('Registration successful!');
-        localStorage.setItem('token', data.token);
-        navigate('/'); // Redirect after successful registration
-      } else {
-        alert(data.msg || 'Registration failed');
-      }
-    } catch (error) {
-      console.error(error);
-      alert('Error connecting to server');
-    } finally {
-      setIsSubmitting(false);
-    }
+try {
+  const res = await API.post("/auth/register", formData);
+
+  if (res.status === 200) {
+    alert("Registration successful!");
+    localStorage.setItem("token", res.data.token);
+    navigate("/"); // Redirect after successful registration
+  } else {
+    alert(res.data.msg || "Registration failed");
+  }
+} catch (error) {
+  console.error(error);
+  alert(error.response?.data?.msg || "Error connecting to server");
+} finally {
+  setIsSubmitting(false);
+}
   };
+
 
   return (
     <>

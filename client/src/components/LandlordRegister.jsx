@@ -3,6 +3,7 @@ import '../styles/LandlordRegister.css';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './NavBar';
 import Footer from './Footer';
+import API from '../api';
 
 const LandlordRegister = () => {
   const [formData, setFormData] = useState({
@@ -53,42 +54,39 @@ const LandlordRegister = () => {
   if (!validate()) return;
 
   setIsSubmitting(true);
-
-  try {
-    const formDataToSend = new FormData();
-    for (const key in formData) {
-      if (formData[key] !== null) {
-        formDataToSend.append(key, formData[key]);
-      }
+try {
+  const formDataToSend = new FormData();
+  for (const key in formData) {
+    if (formData[key] !== null) {
+      formDataToSend.append(key, formData[key]);
     }
-    formDataToSend.append("role", "landlord");
-
-    const res = await fetch("http://localhost:5000/api/auth/register-landlord", {
-      method: "POST",
-      body: formDataToSend,
-    });
-
-    const data = await res.json();
-    if (res.ok) {
-      // Store token and role immediately after registration
-      if (data.token && data.user) {
-        sessionStorage.setItem("token", data.token);
-        sessionStorage.setItem("role", data.user.role);
-        sessionStorage.setItem("user", JSON.stringify(data.user));
-        navigate("/login");
-      } else {
-        alert('Registered successfully! Please login.');
-        navigate("/login");
-      }
-    } else {
-      alert(data.msg || "Registration failed");
-    }
-  } catch (error) {
-    console.error(error);
-    alert("Server error");
-  } finally {
-    setIsSubmitting(false);
   }
+  formDataToSend.append("role", "landlord");
+
+  const res = await API.post("/auth/register-landlord", formDataToSend, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+
+  const data = res.data;
+
+  // ✅ Store token and role immediately after registration
+  if (data.token && data.user) {
+    sessionStorage.setItem("token", data.token);
+    sessionStorage.setItem("role", data.user.role);
+    sessionStorage.setItem("user", JSON.stringify(data.user));
+    navigate("/login");
+  } else {
+    alert("Registered successfully! Please login.");
+    navigate("/login");
+  }
+} catch (error) {
+  console.error("Landlord registration error:", error);
+  alert("Server error");
+} finally {
+  setIsSubmitting(false);
+}
 };
 
 return (

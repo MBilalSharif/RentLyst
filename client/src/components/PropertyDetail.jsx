@@ -5,6 +5,8 @@ import axios from "axios";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../styles/PropertyDetails.css";
+import API from "../api";
+
 
 const PropertyDetail = () => {
   const { id } = useParams();
@@ -20,7 +22,7 @@ const PropertyDetail = () => {
         setIsLoading(true);
         setError("");
 
-        const res = await axios.get(`http://localhost:5000/api/rentals/${id}`);
+        const res = await API.get(`/rentals/${id}`);
         setProperty(res.data);
       } catch (err) {
         console.error("Error fetching property:", err);
@@ -43,13 +45,13 @@ const PropertyDetail = () => {
   };
 
   const goToNextImage = () => {
-    setCurrentImageIndex((prevIndex) => 
+    setCurrentImageIndex((prevIndex) =>
       (prevIndex + 1) % property.image.length
     );
   };
 
   const goToPrevImage = () => {
-    setCurrentImageIndex((prevIndex) => 
+    setCurrentImageIndex((prevIndex) =>
       prevIndex === 0 ? property.image.length - 1 : prevIndex - 1
     );
   };

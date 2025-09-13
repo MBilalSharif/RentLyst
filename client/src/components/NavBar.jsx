@@ -1,7 +1,7 @@
 import React from 'react';
 import { Home } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import '../styles/Navbar.css'; // Optional: Create this if needed for scoped styles
+import '../styles/NavBar.css'; 
 
 const Navbar = () => (
     <header className="header">

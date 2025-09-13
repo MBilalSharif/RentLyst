@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./NavLandlord";
 import { FaUserCircle, FaBuilding, FaIdCard, FaPencilAlt, FaSave } from "react-icons/fa";
 import "../styles/LandlordProfile.css";
+import API from "../api";
 
 const LandlordProfile = () => {
   const [formData, setFormData] = useState({
@@ -23,41 +24,44 @@ const LandlordProfile = () => {
 
   const token = sessionStorage.getItem("token");
 
-  // Fetch landlord profile on component mount
+  // ✅ Fetch landlord profile on mount
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/auth/landlord/profile", {
+        const res = await API.get("/auth/landlord/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
-        const data = await res.json();
-        if (res.ok) {
-          setFormData({
-            name: data.user.name || "",
-            phone: data.user.phone || "",
-            address: data.user.address || "",
-            companyName: data.user.companyName || "",
-            taxId: data.user.taxId || "",
-            bankAccount: data.user.bankAccount || "",
-            yearsExperience: data.user.yearsExperience || "",
-            bio: data.user.bio || "",
-          });
-          if (data.user.profileImage) setPreviewImage(data.user.profileImage);
-          if (data.user.governmentId) setPreviewGovId(data.user.governmentId);
-        } else {
-          alert(data.msg || "Failed to load profile");
-        }
+
+        const data = res.data; // ✅ axios already parses JSON
+
+        setFormData({
+          name: data.user.name || "",
+          phone: data.user.phone || "",
+          address: data.user.address || "",
+          companyName: data.user.companyName || "",
+          taxId: data.user.taxId || "",
+          bankAccount: data.user.bankAccount || "",
+          yearsExperience: data.user.yearsExperience || "",
+          bio: data.user.bio || "",
+        });
+
+        if (data.user.profileImage) setPreviewImage(data.user.profileImage);
+        if (data.user.governmentId) setPreviewGovId(data.user.governmentId);
       } catch (error) {
         console.error("Error fetching profile:", error);
+        alert("Failed to load profile");
       }
     };
+
     fetchProfile();
   }, [token]);
 
+  // ✅ Handle input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // ✅ Handle file upload preview
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (e.target.name === "profileImage") {
@@ -69,30 +73,31 @@ const LandlordProfile = () => {
     }
   };
 
+  // ✅ Submit profile update
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
       const formDataToSend = new FormData();
-      Object.keys(formData).forEach((key) => formDataToSend.append(key, formData[key]));
+      Object.keys(formData).forEach((key) =>
+        formDataToSend.append(key, formData[key])
+      );
       if (profileImage) formDataToSend.append("profileImage", profileImage);
       if (governmentId) formDataToSend.append("governmentId", governmentId);
 
-      const res = await fetch("http://localhost:5000/api/auth/landlord/profile", {
-        method: "PUT",
+      const res = await API.put("/auth/landlord/profile", formDataToSend, {
         headers: { Authorization: `Bearer ${token}` },
-        body: formDataToSend,
       });
-      const data = await res.json();
 
-      if (res.ok) {
+      if (res.status === 200) {
         alert("Profile updated successfully");
       } else {
-        alert(data.msg || "Update failed");
+        alert(res.data.msg || "Update failed");
       }
     } catch (error) {
       console.error("Error updating profile:", error);
+      alert("Server error");
     } finally {
       setLoading(false);
     }
