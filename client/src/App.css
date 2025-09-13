@@ -1,11 +1,26 @@
+/* 1. Simple CSS Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 2. Ensure html and body take full height */
+html, body {
+  height: 100%; /* Full height of the viewport */
+  width: 100%; /* Full width */
+}
+
+/* 3. Style the root div to be a proper full-height container */
 #root {
-  height: 100%;
+  min-height: 100vh; /* At least the full viewport height */
   width: 100%;
   margin: 0;
   padding: 0;
   text-align: center; /* keep if you really want center text */
 }
 
+/* 4. Your original logo styles (keep these) */
 .logo {
   height: 6em;
   padding: 1.5em;

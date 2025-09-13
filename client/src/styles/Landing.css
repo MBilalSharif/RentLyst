@@ -17,10 +17,10 @@ body {
 }
 
 .container {
-  width: 100%;        /* full width */
-  margin: 0;          /* no centering */
-  padding: 0;         /* remove left/right padding */
-  max-width: 100%;    /* remove restriction */
+  width: 100%;
+  margin: 0 auto;     /* Center the container */
+  padding: 0 20px;    /* Add comfortable side padding */
+  max-width: 1200px;  /* Constrain width on large screens */
 }
 
 

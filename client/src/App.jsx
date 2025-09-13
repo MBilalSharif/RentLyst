@@ -2,13 +2,10 @@
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-// import './index.css';
-
 import LandingPage from './components/LandingPage';
 import Login from './components/Login';
 import Register from './components/Register';
 import RentingListings from './components/RentingListings';
-
 import LandlordRegister from './components/LandlordRegister';
 import LandlordDashboard from './components/LandlordDashboard';
 import AddRentalProperty from './components/AddRentalProperty';
@@ -28,7 +25,6 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/listings" element={<HouseListing />} />
         <Route path="/landlord-register" element={<LandlordRegister />} />
         <Route path="/LandingPage" element={<LandingPage />} />
         <Route path="/rent" element={<RentingListings />} />
