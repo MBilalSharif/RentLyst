@@ -12,42 +12,41 @@ const MyListedProperties = () => {
   }, []);
 
   const fetchProperties = async () => {
-    const token = sessionStorage.getItem('token');
+    const token = sessionStorage.getItem("token");
     try {
-  const res = await API.get("/rentals/my-properties", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-      const data = await res.json();
-      if (res.ok) setProperties(data);
-      else alert(data.msg || "Error fetching listings.");
+      const res = await API.get("/rentals/my-properties", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // ✅ Axios already parses JSON, no need for res.json()
+      setProperties(res.data);
     } catch (err) {
-      console.error('Error:', err);
+      console.error("Error fetching properties:", err);
+      alert("Error fetching listings.");
     }
   };
 
   const handleDelete = async (id) => {
-    const confirm = window.confirm('Are you sure you want to delete this property?');
-    if (!confirm) return;
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this property?"
+    );
+    if (!confirmDelete) return;
 
-    const token = sessionStorage.getItem('token');
+    const token = sessionStorage.getItem("token");
     try {
-      const res = await fetch(`http://localhost:5000/api/rentals/${id}`, {
-        method: 'DELETE',
+      const res = await API.delete(`/rentals/${id}`, {
         headers: {
-          'Authorization': `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
-      const data = await res.json();
-      if (res.ok) {
-        alert('Property deleted successfully');
-        fetchProperties(); // refresh list
-      } else {
-        alert(data.msg || 'Delete failed');
-      }
+
+      alert("Property deleted successfully");
+      fetchProperties(); // refresh list
     } catch (err) {
-      console.error('Delete error:', err);
+      console.error("Delete error:", err);
+      alert("Delete failed");
     }
   };
 
