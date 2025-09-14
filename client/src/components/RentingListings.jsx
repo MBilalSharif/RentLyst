@@ -18,14 +18,27 @@ const RentingListings = () => {
     const fetchRentals = async () => {
       try {
         setIsLoading(true);
+
+        // ✅ Construct endpoint
         let endpoint = "/rentals";
         if (searchLocation) {
           endpoint += `?location=${encodeURIComponent(searchLocation)}`;
         }
 
+        // 🔹 Debug: log full request URL
+        console.log("Fetching rentals from:", API.defaults.baseURL + endpoint);
+
+        // 🔹 Optional test: hardcoded full URL if env variable fails
+        // const res = await API.get("https://rentlyst.onrender.com/api/rentals");
+
         const res = await API.get(endpoint);
+
+        // 🔹 Debug: log response
+        console.log("Response data:", res.data);
+
         setRentals(res.data);
       } catch (err) {
+        // 🔹 Debug: log full error object
         console.error("Error fetching rentals:", err);
       } finally {
         setIsLoading(false);
@@ -35,11 +48,9 @@ const RentingListings = () => {
     fetchRentals();
   }, [searchLocation]);
 
-  // ✅ Navigate to property detail page
   const navigateToDetails = (id) => {
     navigate(`/property/${id}`);
   };
-
   return (
     <>
       <Navbar />

@@ -18,6 +18,15 @@ const upload = require("../middleware/uploadMiddleware");
 // Public Routes
 router.get("/", getAvailableRentals);
 router.get("/filter", filterRentals);
+router.get("/:id", async (req, res) => {
+  try {
+    const property = await RentalProperty.findById(req.params.id).populate("createdBy", "-password");
+    if (!property) return res.status(404).json({ message: "Property not found" });
+    res.json(property);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
 // Protected Routes (Landlord only)
 router.post("/landlord-dashboard", protect, landlordOnly, addRental);
@@ -25,24 +34,7 @@ router.post("/", protect, landlordOnly, upload.array("image",5), addRental);
 router.get("/my-properties", protect, landlordOnly, getUserRentals);
 router.put("/:id", protect, landlordOnly, upload.array("image",5), updateRental);
 router.delete("/:id", protect, landlordOnly, deleteRental);
-// router.get("/:id", async (req, res) => {
-//   try {
-//     const property = await Property.findById(req.params.id);
-//     res.json(property);
-//   } catch (err) {
-//     res.status(500).json({ message: err.message });
-//   }
-// });
-router.get("/:id", async (req, res) => {
-  try {
-    const property = await RentalProperty.findById(req.params.id).populate("createdBy", "-password");
-    if (!property) {
-      return res.status(404).json({ message: "Property not found" });
-    }
-    res.json(property);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
+
+
 
 module.exports = router;
