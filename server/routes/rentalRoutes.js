@@ -18,6 +18,16 @@ const upload = require("../middleware/uploadMiddleware");
 // Public Routes
 router.get("/", getAvailableRentals);
 router.get("/filter", filterRentals);
+
+
+// Protected Routes (Landlord only)
+router.post("/landlord-dashboard", protect, landlordOnly, addRental);
+router.post("/", protect, landlordOnly, upload.array("image",5), addRental);
+router.get("/my-properties", protect, landlordOnly, getUserRentals);
+router.put("/:id", protect, landlordOnly, upload.array("image",5), updateRental);
+router.delete("/:id", protect, landlordOnly, deleteRental);
+
+
 router.get("/:id", async (req, res) => {
   try {
     const property = await RentalProperty.findById(req.params.id).populate("createdBy", "-password");
@@ -27,13 +37,6 @@ router.get("/:id", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-
-// Protected Routes (Landlord only)
-router.post("/landlord-dashboard", protect, landlordOnly, addRental);
-router.post("/", protect, landlordOnly, upload.array("image",5), addRental);
-router.get("/my-properties", protect, landlordOnly, getUserRentals);
-router.put("/:id", protect, landlordOnly, upload.array("image",5), updateRental);
-router.delete("/:id", protect, landlordOnly, deleteRental);
 
 
 
