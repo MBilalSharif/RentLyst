@@ -11,12 +11,11 @@ const path = require('path');
 
 const app = express();
 
-// Serve uploaded images
-// app.use('/upload', express.static(path.join(process.cwd(), 'upload')));
-// app.use("/upload", express.static(path.join(__dirname, "upload"))); 
+
 
 // Core middleware
 app.use(cors());
+app.use(cors({ origin: "https://rent-lyst-frontend.vercel.app/" }));
 app.use(express.json());
 
 // Routes
