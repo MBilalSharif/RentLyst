@@ -1,28 +1,23 @@
-// server.js (only showing relevant bits)
 const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
-
 const rentalRoutes = require('./routes/rentalRoutes');
-const path = require('path');
 
 const app = express();
 
-
-
-// Core middleware
-app.use(cors());
-app.use(cors({ origin: "https://rent-lyst-frontend.vercel.app/" }));
+// Middleware
+app.use(cors({
+  origin: "https://rent-lyst-frontend.vercel.app", // no trailing slash
+  credentials: true,
+}));
 app.use(express.json());
 
 // Routes
-
 app.use('/api/rentals', rentalRoutes);
 app.use('/api/auth', authRoutes);
-
 
 app.get("/", (req, res) => {
   res.send("🚀 Backend is live on Render!");
