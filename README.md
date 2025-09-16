@@ -65,7 +65,7 @@ Live Website: https://rent-lyst-frontend.vercel.app/
 
 Clone the repository:
 
-git clone https://github.com/your-username/RentLyst.git
+git clone https://github.com/MBilalSharif/RentLyst.git
 cd RentLyst
 
 
