@@ -1,4 +1,3 @@
-// controllers/authController.js
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
@@ -13,7 +12,7 @@ const generateToken = (user) => {
   );
 };
 // =============================
-// 📌 Register Controller (Fixed)
+//  Register Controller 
 // =============================
 const register = async (req, res) => {
   console.log("✅ register controller hit");
@@ -65,7 +64,7 @@ const register = async (req, res) => {
       governmentId = result.secure_url;
     }
 
-    // ✅ Pass raw password, Mongoose pre('save') will hash it
+    // Pass raw password, Mongoose pre('save') will hash it
     const user = await User.create({
       name,
       email,
